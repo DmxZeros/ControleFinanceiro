@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dimas\\Desktop\\ControleFinanceiro\\ControleFinanceiro.BLL\\ControleFinanceiro.BLL.csproj": {}
+    "C:\\Users\\Dimas\\Desktop\\ProjetoControleFinanceiro\\ControleFinanceiro.BLL\\ControleFinanceiro.BLL.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dimas\\Desktop\\ControleFinanceiro\\ControleFinanceiro.BLL\\ControleFinanceiro.BLL.csproj": {
+    "C:\\Users\\Dimas\\Desktop\\ProjetoControleFinanceiro\\ControleFinanceiro.BLL\\ControleFinanceiro.BLL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dimas\\Desktop\\ControleFinanceiro\\ControleFinanceiro.BLL\\ControleFinanceiro.BLL.csproj",
+        "projectUniqueName": "C:\\Users\\Dimas\\Desktop\\ProjetoControleFinanceiro\\ControleFinanceiro.BLL\\ControleFinanceiro.BLL.csproj",
         "projectName": "ControleFinanceiro.BLL",
-        "projectPath": "C:\\Users\\Dimas\\Desktop\\ControleFinanceiro\\ControleFinanceiro.BLL\\ControleFinanceiro.BLL.csproj",
+        "projectPath": "C:\\Users\\Dimas\\Desktop\\ProjetoControleFinanceiro\\ControleFinanceiro.BLL\\ControleFinanceiro.BLL.csproj",
         "packagesPath": "C:\\Users\\Dimas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dimas\\Desktop\\ControleFinanceiro\\ControleFinanceiro.BLL\\obj\\",
+        "outputPath": "C:\\Users\\Dimas\\Desktop\\ProjetoControleFinanceiro\\ControleFinanceiro.BLL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

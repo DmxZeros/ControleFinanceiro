@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XxQNvrOGd4HZhD+SjQyr/Sbat5HMuChVT9n8L8EBFji7GakCdT8tH3Yjb3riWGKook7gxEjG0JLY2YyAJPyESw==",
+  "dgSpecHash": "f3zYnG2Xt9DQ2yAa+HWZH+sMP+cqnBxe6Sj6EEsNY9sRcfx7pFCUOExUNrIs29CVhBZu+Y4WExw5NuQdSVjMcQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Dimas\\Desktop\\ControleFinanceiro\\ControleFinanceiro.DAL\\ControleFinanceiro.DAL.csproj",
+  "projectFilePath": "C:\\Users\\Dimas\\Desktop\\ProjetoControleFinanceiro\\ControleFinanceiro.DAL\\ControleFinanceiro.DAL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Dimas\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "C:\\Users\\Dimas\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
