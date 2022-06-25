@@ -1,0 +1,9 @@
+<h1>Confirmação de Exclusão</h1>
+<div mat-dialog-content>
+  Prosseguir com a exclusão da função {{data.nome}}
+</div>
+
+<mat-dialog-actions allign="end">
+  <button mat-button mat-dialog-close>Não</button>
+  <button mat-button [mat-dialog-close]="true" (click)="ExcluirFuncao(data.funcaoId)">Sim</button>
+</mat-dialog-actions>

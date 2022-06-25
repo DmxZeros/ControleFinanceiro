@@ -60,7 +60,7 @@ export class AtualizarCategoriaComponent implements OnInit {
     this.erros = []; //evita exibir duplicacoes
 
     this.categoriaService.AualizarCategoria(this.categoriaId, categoria).subscribe((resultado) =>{
-      this.router.navigate(['categorias/listagemCategorias']);
+      this.router.navigate(['categorias/listagemcategorias']);
 
       this.snackBar.open(resultado.mensagem, null, {
         duration: 2000,
@@ -79,7 +79,7 @@ export class AtualizarCategoriaComponent implements OnInit {
   }
 
   VoltarListagem(): void {
-    this.router.navigate(['categorias/listagemCategorias'])
+    this.router.navigate(['categorias/listagemcategorias'])
   }
 
 }

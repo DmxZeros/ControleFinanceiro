@@ -31,6 +31,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ListagemFuncoesComponent, DialogExclusaoFuncoesComponent } from './components/Funcao/listagem-funcoes/listagem-funcoes.component';
+import { NovaFuncaoComponent } from './components/Funcao/nova-funcao/nova-funcao.component';
+import { AtualizarFuncaoComponent } from './components/Funcao/atualizar-funcao/atualizar-funcao.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,11 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     ListagemCategoriasComponent,
     NovaCategoriaComponent,
     AtualizarCategoriaComponent,
-    DialogExclusaoCategoriasComponent
+    DialogExclusaoCategoriasComponent,
+    ListagemFuncoesComponent,
+    DialogExclusaoFuncoesComponent,
+    NovaFuncaoComponent,
+    AtualizarFuncaoComponent
   ],
   imports: [
     BrowserModule,

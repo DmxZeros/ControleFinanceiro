@@ -48,7 +48,7 @@ export class NovaCategoriaComponent implements OnInit {
     this.erros = []; //evita exibir duplicacoes
 
     this.categoriaService.NovaCategoria(categoria).subscribe((resultado) => {
-      this.route.navigate(['categorias/listagemCategorias']);
+      this.route.navigate(['categorias/listagemcategorias']);
 
       this.snackBar.open(resultado.mensagem, null, {
         duration: 2000,
@@ -67,7 +67,7 @@ export class NovaCategoriaComponent implements OnInit {
   }
 
   VoltarListagem(): void {
-    this.route.navigate(['categorias/listagemCategorias'])
+    this.route.navigate(['categorias/listagemcategorias'])
   }
 
 }

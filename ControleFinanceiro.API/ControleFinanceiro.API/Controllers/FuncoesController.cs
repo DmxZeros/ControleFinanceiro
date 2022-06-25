@@ -15,23 +15,23 @@ namespace ControleFinanceiro.API.Controllers
     [ApiController]
     public class FuncoesController : ControllerBase
     {
-        private readonly IFuncaoRepositorio _funcaoRespositorio;
+        private readonly IFuncaoRepositorio _funcaoRepositorio;
 
         public FuncoesController(IFuncaoRepositorio funcaoRespositorio)
         {
-            _funcaoRespositorio = funcaoRespositorio;
+            _funcaoRepositorio = funcaoRespositorio;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Funcao>>> GetFuncoes()
         {
-            return await _funcaoRespositorio.PegarTodos().ToListAsync();
+            return await _funcaoRepositorio.PegarTodos().ToListAsync();
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Funcao>> GetFuncao(string id)
         {
-            var funcao = await _funcaoRespositorio.PegarPeloId(id);
+            var funcao = await _funcaoRepositorio.PegarPeloId(id);
 
             if (funcao == null)
             {
@@ -58,7 +58,7 @@ namespace ControleFinanceiro.API.Controllers
                     Descricao = funcoes.Descricao
                 };
 
-                await _funcaoRespositorio.AtualizarFuncao(funcao);
+                await _funcaoRepositorio.AtualizarFuncao(funcao);
 
                 return Ok(new
                 {
@@ -80,7 +80,7 @@ namespace ControleFinanceiro.API.Controllers
                     Descricao = funcoes.Descricao
                 };
 
-                await _funcaoRespositorio.AdicionarFuncao(funcao);
+                await _funcaoRepositorio.AdicionarFuncao(funcao);
 
                 return Ok(new
                 {
@@ -94,14 +94,14 @@ namespace ControleFinanceiro.API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Funcao>> DeleteFuncao(string id)
         {
-            var funcao = await _funcaoRespositorio.PegarPeloId(id);
+            var funcao = await _funcaoRepositorio.PegarPeloId(id);
 
             if (funcao ==null)
             {
                 return NotFound();
             }
 
-            await _funcaoRespositorio.Excluir(funcao);
+            await _funcaoRepositorio.Excluir(funcao);
 
             return Ok(new
             {
@@ -109,5 +109,11 @@ namespace ControleFinanceiro.API.Controllers
             });
         }
 
-    }       
+        [HttpGet("FiltrarFuncoes/{nomeFuncao}")]
+        public async Task<ActionResult<IEnumerable<Funcao>>> FiltrarFuncoes(string nomeFuncao)
+        {
+            return await _funcaoRepositorio.FiltrarFuncoes(nomeFuncao).ToListAsync();
+        }
+
+    }    
 }

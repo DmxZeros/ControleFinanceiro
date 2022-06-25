@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace ControleFinanceiro.DAL.Interfaces
 {
@@ -11,5 +12,7 @@ namespace ControleFinanceiro.DAL.Interfaces
         Task AdicionarFuncao(Funcao funcao);
 
         Task AtualizarFuncao(Funcao funcao);
+
+        IQueryable<Funcao> FiltrarFuncoes(string nomeFuncao);
     }
 }
