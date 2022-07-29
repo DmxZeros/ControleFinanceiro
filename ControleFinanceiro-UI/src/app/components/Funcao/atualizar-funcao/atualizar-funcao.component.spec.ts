@@ -11,9 +11,7 @@ describe('AtualizarFuncaoComponent', () => {
       declarations: [ AtualizarFuncaoComponent ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(AtualizarFuncaoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

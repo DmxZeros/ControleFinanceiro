@@ -11,9 +11,7 @@ describe('NovaCategoriaComponent', () => {
       declarations: [ NovaCategoriaComponent ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(NovaCategoriaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

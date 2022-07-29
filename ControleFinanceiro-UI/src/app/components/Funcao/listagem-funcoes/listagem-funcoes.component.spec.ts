@@ -11,9 +11,7 @@ describe('ListagemFuncoesComponent', () => {
       declarations: [ ListagemFuncoesComponent ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(ListagemFuncoesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

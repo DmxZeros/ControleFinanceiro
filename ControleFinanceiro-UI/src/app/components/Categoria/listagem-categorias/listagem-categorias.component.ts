@@ -31,6 +31,7 @@ export class ListagemCategoriasComponent implements OnInit {
   constructor(private categoriaService: CategoriasService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
+
     this.categoriaService.PegarTodos().subscribe(resultado => {
       resultado.forEach((categoria) => {
         this.opcoesCategoria.push(categoria.nome);
@@ -50,7 +51,7 @@ export class ListagemCategoriasComponent implements OnInit {
     return ['nome', 'icone', 'tipo', 'acoes'];
   }
 
-  AbrirDialog(categoriaId, nome): void {
+  AbrirDialog(categoriaId:number, nome:string): void {
     this.dialog.open(DialogExclusaoCategoriasComponent, {
       data:{
         categoriaId: categoriaId,
@@ -89,7 +90,6 @@ export class ListagemCategoriasComponent implements OnInit {
       categoria.toLocaleLowerCase().includes(nome.toLocaleLowerCase())
     );
   }
-
 }
 
 @Component({
@@ -102,9 +102,9 @@ export class DialogExclusaoCategoriasComponent {
     private categoriaService: CategoriasService){}
     private snackBar: MatSnackBar
 
-  ExcluirCategoria(categoriaId):void {
+  ExcluirCategoria(categoriaId: number):void {
     this.categoriaService.ExcluirCategoria(categoriaId).subscribe(resultado => {
-      this.snackBar.open(resultado.mensagem, null, {
+      this.snackBar.open(resultado.mensagem, '', {
         duration: 2000,
         horizontalPosition: 'right',
         verticalPosition: 'top'

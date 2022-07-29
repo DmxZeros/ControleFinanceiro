@@ -4,7 +4,7 @@ export class Categoria
 {
   categoriaId: number;
   nome: string;
-  icone: string;
+  icone: string ;
   tipoId: number;
   tipo: Tipo;
 }

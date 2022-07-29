@@ -62,7 +62,7 @@ export class AtualizarCategoriaComponent implements OnInit {
     this.categoriaService.AualizarCategoria(this.categoriaId, categoria).subscribe((resultado) =>{
       this.router.navigate(['categorias/listagemcategorias']);
 
-      this.snackBar.open(resultado.mensagem, null, {
+      this.snackBar.open(resultado.mensagem, '', {
         duration: 2000,
         horizontalPosition: 'right',
         verticalPosition: 'top'

@@ -49,7 +49,7 @@ export class AtualizarFuncaoComponent implements OnInit {
     this.funcoesService.AtualizarFuncao(this.funcaoId, funcao).subscribe((resultado) => {
       this.router.navigate(['/funcoes/listagemfuncoes']);
 
-      this.snackBar.open(resultado.mensagem, null, {
+      this.snackBar.open(resultado.mensagem, '', {
         duration: 2000,
         horizontalPosition: 'right',
         verticalPosition: 'top'

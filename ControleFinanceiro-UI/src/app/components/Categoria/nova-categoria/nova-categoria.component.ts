@@ -21,8 +21,7 @@ export class NovaCategoriaComponent implements OnInit {
     private tipoService: TiposService,
     private categoriaService: CategoriasService,
     private route: Router,
-    private snackBar: MatSnackBar
-    ) { }
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.tipoService.PegarTodos().subscribe(resultado => {
@@ -50,7 +49,7 @@ export class NovaCategoriaComponent implements OnInit {
     this.categoriaService.NovaCategoria(categoria).subscribe((resultado) => {
       this.route.navigate(['categorias/listagemcategorias']);
 
-      this.snackBar.open(resultado.mensagem, null, {
+      this.snackBar.open(resultado.mensagem, '', {
         duration: 2000,
         horizontalPosition: 'right',
         verticalPosition: 'top'
@@ -69,5 +68,4 @@ export class NovaCategoriaComponent implements OnInit {
   VoltarListagem(): void {
     this.route.navigate(['categorias/listagemcategorias'])
   }
-
 }

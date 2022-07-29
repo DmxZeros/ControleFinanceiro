@@ -11,9 +11,7 @@ describe('NovaFuncaoComponent', () => {
       declarations: [ NovaFuncaoComponent ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(NovaFuncaoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

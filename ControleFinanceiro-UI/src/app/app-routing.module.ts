@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { ListagemCategoriasComponent } from './components/Categoria/listagem-categorias/listagem-categorias.component';
+import { RouterModule, Routes } from '@angular/router';
+
+/*components*/
 import { NovaCategoriaComponent } from './components/Categoria/nova-categoria/nova-categoria.component';
+import { ListagemCategoriasComponent } from './components/Categoria/listagem-categorias/listagem-categorias.component';
 import { AtualizarCategoriaComponent } from './components/Categoria/atualizar-categoria/atualizar-categoria.component';
-import { ListagemFuncoesComponent } from './components/Funcao/listagem-funcoes/listagem-funcoes.component';
 import { NovaFuncaoComponent } from './components/Funcao/nova-funcao/nova-funcao.component';
+import { ListagemFuncoesComponent } from './components/Funcao/listagem-funcoes/listagem-funcoes.component';
 import { AtualizarFuncaoComponent } from './components/Funcao/atualizar-funcao/atualizar-funcao.component';
+import { RegistrarUsuarioComponent } from './components/Usuario/Registro/registrar-usuario/registrar-usuario.component';
 
 const routes: Routes = [
   {
@@ -15,11 +18,9 @@ const routes: Routes = [
   {
     path: 'categorias/novacategoria', component: NovaCategoriaComponent
   },
-
   {
     path: 'categorias/atualizarcategoria/:id', component: AtualizarCategoriaComponent
   },
-
   {
     path: 'funcoes/listagemfuncoes', component: ListagemFuncoesComponent
   },
@@ -30,6 +31,9 @@ const routes: Routes = [
 
   {
     path: 'funcoes/atualizarfuncao/:id', component: AtualizarFuncaoComponent
+  },
+  {
+    path: 'usuarios/registrarusuario', component: RegistrarUsuarioComponent
   }
 ];
 

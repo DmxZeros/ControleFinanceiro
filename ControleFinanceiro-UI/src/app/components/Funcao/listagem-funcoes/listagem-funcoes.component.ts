@@ -68,7 +68,7 @@ export class ListagemFuncoesComponent implements OnInit {
     return this.opcoesFuncoes.filter((funcao) => funcao.toLowerCase().includes(nome.toLowerCase()));
   }
 
-  AbrirDialog(funcaoId, nome): void  {
+  AbrirDialog(funcaoId: number, nome: string): void  {
     this.dialog.open(DialogExclusaoFuncoesComponent, {
       data:
       {
@@ -98,9 +98,9 @@ export class DialogExclusaoFuncoesComponent{
   private funcoesService: FuncoesService,
   private snackBar: MatSnackBar){}
 
-  ExcluirFuncao(funcaoId): void {
+  ExcluirFuncao(funcaoId: string): void {
     this.funcoesService.ExcluirFuncao(funcaoId).subscribe(resultado => {
-      this.snackBar.open(resultado.mensagem, null, {
+      this.snackBar.open(resultado.mensagem, '', {
         duration: 2000,
         horizontalPosition: 'right',
         verticalPosition: 'top'

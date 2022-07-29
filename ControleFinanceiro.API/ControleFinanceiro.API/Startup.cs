@@ -19,6 +19,8 @@ using ControleFinanceiro.DAL.Repositorios;
 using FluentValidation;
 using ControleFinanceiro.API.Validacoes;
 using FluentValidation.AspNetCore;
+using ControleFinanceiro.API.Validacoes.ViewModels;
+using ControleFinanceiro.API.Extensions;
 
 namespace ControleFinanceiro.API
 {
@@ -34,16 +36,23 @@ namespace ControleFinanceiro.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //conexao e contexto
             services.AddDbContext<DbContexto>(opcoes => opcoes.UseSqlServer(Configuration.GetConnectionString("Conexao")));
-
             services.AddIdentity<Usuario, Funcao>().AddEntityFrameworkStores < DbContexto >();
 
+            services.ConfigurarSenhaUsuario();
+
+            //repositorios
             services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
             services.AddScoped<ITipoRepositorio, TipoRepositorio>();
             services.AddScoped<IFuncaoRepositorio, FuncaoRepositorio>();
+            services.AddScoped<IFuncaoRepositorio, FuncaoRepositorio>();
+            services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 
             //fluente api
             services.AddTransient<IValidator<Categoria>, CategoriaValidator>();
+            services.AddTransient<IValidator<FuncoesViewModel>, FuncoesViewModelValidatos>();
+            services.AddTransient < IValidator<RegistroViewModel>, RegistroViewModelValidator>();
 
             services.AddCors();
 
