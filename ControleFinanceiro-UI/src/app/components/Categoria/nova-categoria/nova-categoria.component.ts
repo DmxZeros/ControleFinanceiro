@@ -28,7 +28,7 @@ export class NovaCategoriaComponent implements OnInit {
       this.tipos = resultado;
       this.erros = [];
 
-      console.log(resultado);
+      //console.log(resultado);
     });
 
     this.formulario = new FormGroup({

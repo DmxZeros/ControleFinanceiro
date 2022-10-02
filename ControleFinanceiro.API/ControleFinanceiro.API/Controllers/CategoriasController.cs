@@ -30,7 +30,7 @@ namespace ControleFinanceiro.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Categoria>>GetCategoria(int id)
+        public async Task<ActionResult<Categoria>> GetCategoria(int id)
         {
             var categoria = await _categoriaRepositorio.PegarPeloId(id);
 
@@ -100,6 +100,18 @@ namespace ControleFinanceiro.API.Controllers
         public async Task<ActionResult<IEnumerable<Categoria>>> FiltrarCategorias(string nomeCategoria)
         {
             return await _categoriaRepositorio.FiltrarCategorias(nomeCategoria).ToListAsync();
+        }
+
+        [HttpGet("FiltrarCategoriasDespesas")]
+        public async Task<ActionResult<IEnumerable<Categoria>>> FiltrarCategoriasDespesas()
+        {
+            return await _categoriaRepositorio.PegarCategoriasPeloTipo("Despesa").ToListAsync();
+        }
+
+        [HttpGet("FiltrarCategoriasGanhos")]
+        public async Task<ActionResult<IEnumerable<Categoria>>> FiltrarCategoriasGanhos()
+        {
+            return await _categoriaRepositorio.PegarCategoriasPeloTipo("Ganho").ToListAsync();
         }
     }
 }

@@ -21,6 +21,9 @@ using ControleFinanceiro.API.Validacoes;
 using FluentValidation.AspNetCore;
 using ControleFinanceiro.API.Validacoes.ViewModels;
 using ControleFinanceiro.API.Extensions;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace ControleFinanceiro.API
 {
@@ -46,13 +49,22 @@ namespace ControleFinanceiro.API
             services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
             services.AddScoped<ITipoRepositorio, TipoRepositorio>();
             services.AddScoped<IFuncaoRepositorio, FuncaoRepositorio>();
-            services.AddScoped<IFuncaoRepositorio, FuncaoRepositorio>();
             services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+            services.AddScoped<ICartaoRepositorio, CartaoRepositorio>();
+            services.AddScoped<IDespesaRepositorio, DespesaRepositorio>();
+            services.AddScoped<IMesRepositorio, MesRepositorio>();
+            services.AddScoped<IGanhosRepositorio, GanhoRepositorio>();
+            services.AddScoped<IGraficoRepositorio, GraficoRepositorio>();
 
             //fluente api
             services.AddTransient<IValidator<Categoria>, CategoriaValidator>();
             services.AddTransient<IValidator<FuncoesViewModel>, FuncoesViewModelValidatos>();
-            services.AddTransient < IValidator<RegistroViewModel>, RegistroViewModelValidator>();
+            services.AddTransient<IValidator<RegistroViewModel>, RegistroViewModelValidator>();
+            services.AddTransient<IValidator<LoginViewModel>, LoginViewModelValidator>();
+            services.AddTransient<IValidator<Cartao>, CartaoValidator>();
+            services.AddTransient<IValidator<Despesa>, DespesaValidator>();
+            services.AddTransient<IValidator<Ganho>, GanhoValidator>();
+            services.AddTransient<IValidator<AtualizarUsuarioViewModel>, AtualizarUsuarioViewModelValidator>();
 
             services.AddCors();
 
@@ -60,6 +72,26 @@ namespace ControleFinanceiro.API
             {
                 diretorio.RootPath = "ControleFinanceiro-UI";
             });
+
+            var key = Encoding.ASCII.GetBytes(Settings.ChaveSecreta);
+
+            services.AddAuthentication(opcoes =>
+            {
+                opcoes.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opcoes.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(opcoes => {
+                    opcoes.RequireHttpsMetadata = false;
+                    opcoes.SaveToken = true;
+                    opcoes.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+
+                    };
+                });
 
             services.AddControllers()
                 .AddFluentValidation()
@@ -87,6 +119,8 @@ namespace ControleFinanceiro.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

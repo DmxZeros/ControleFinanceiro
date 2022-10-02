@@ -5,7 +5,8 @@ import { Categoria } from '../models/Categoria';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${localStorage.getItem('TokenUsuarioLogado')}`
   })
 };
 
@@ -32,6 +33,7 @@ export class CategoriasService {
 
   NovaCategoria(categoria: Categoria): Observable<any>
   {
+    console.log(localStorage.getItem('TokenUsuarioLogado'));
     return this.http.post<Categoria>(this.url, categoria, httpOptions);
   }
 
@@ -50,4 +52,15 @@ export class CategoriasService {
     const apiUrl = `${this.url}/FiltrarCategorias/${nomeCategoria}`;
     return this.http.get<Categoria[]>(apiUrl);
   }
+
+  FiltrarCategoriasDespesas(): Observable<Categoria[]>{
+    const apiUrl = `${this.url}/FiltrarCategoriasDespesas`;
+    return this.http.get<Categoria[]>(apiUrl);
+  }
+
+  FiltrarCategoriasGanhos(): Observable<Categoria[]> {
+    const apiUrl = `${this.url}/FiltrarCategoriasGanhos`;
+    return this.http.get<Categoria[]>(apiUrl);
+  }
+
 }

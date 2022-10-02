@@ -23,16 +23,29 @@ namespace ControleFinanceiro.DAL.Repositorios
             _gerenciadorLogin = gerenciadorLogin;
         }
 
+        public async Task AtualizarUsuario(Usuario usuario)
+        {
+            try
+            {
+                await _gerenciadorsuarios.UpdateAsync(usuario);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         public async Task<IdentityResult> CriarUsuario(Usuario usuario, string senha)
         {
             try
             {
                 return await _gerenciadorsuarios.CreateAsync(usuario, senha);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
         }
 
@@ -62,11 +75,37 @@ namespace ControleFinanceiro.DAL.Repositorios
             }
         }
 
+        public async Task<IList<string>> PegarFuncoesUsuario(Usuario usuario)
+        {
+            try
+            {
+                return await _gerenciadorsuarios.GetRolesAsync(usuario);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         public async Task<int> PegarQuantidadeUsuariosRegistrados()
         {
             try
             {
                 return await _contexto.Usuarios.CountAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<Usuario> PegarUsuarioPeloEmail(string email)
+        {
+            try
+            {
+                return await _gerenciadorsuarios.FindByEmailAsync(email);
             }
             catch (Exception)
             {

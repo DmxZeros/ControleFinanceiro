@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using ControleFinanceiro.API.Services;
 using ControleFinanceiro.API.Validacoes.ViewModels;
 using ControleFinanceiro.BLL.Models;
 using ControleFinanceiro.DAL.Interfaces;
@@ -24,7 +25,7 @@ namespace ControleFinanceiro.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Usuario>> GetUsuario(string id)
+        public async Task<ActionResult<AtualizarUsuarioViewModel>> GetUsuario(string id)
         {
             var usuario = await _usuarioRepositorio.PegarPeloId(id);
             try
@@ -34,7 +35,17 @@ namespace ControleFinanceiro.API.Controllers
                     return NotFound();
                 }
 
-                return usuario;
+                AtualizarUsuarioViewModel model = new AtualizarUsuarioViewModel
+                {
+                    Id = usuario.Id,
+                    UserName = usuario.UserName,
+                    Email = usuario.Email,
+                    CPF = usuario.CPF,
+                    Profissao = usuario.Profissao,
+                    Foto = usuario.Foto
+                };
+
+                return model;
             }
             catch (Exception)
             {
@@ -96,18 +107,83 @@ namespace ControleFinanceiro.API.Controllers
                 if(usuarioCriado.Succeeded)
                 {
                     await _usuarioRepositorio.IncluirUsuarioEmFuncao(usuario, funcaoUsuario);
+                    var token = TokenService.GerarToken(usuario, funcaoUsuario);
                     await _usuarioRepositorio.LogarUsuario(usuario, false);
 
                     return Ok(new
                     {
                         emailUsuarioLogado = usuario.Email,
-                        usuarioId = usuario.Id
+                        usuarioId = usuario.Id,
+                        tokenUsuarioLogado = token
                     }) ;
                 }
                 else 
                 {
                     return BadRequest(model);
                 }
+            }
+
+            return BadRequest(model);
+        }
+
+        [HttpPost("LogarUsuario")]
+        public async Task<ActionResult> LogarUsuario(LoginViewModel model)
+        {
+            if(model == null) 
+            {
+                return NotFound("Usuário e/ou Senha inválidos");
+            }
+
+            Usuario usuario = await _usuarioRepositorio.PegarUsuarioPeloEmail(model.Email);
+
+            if(usuario != null)
+            {
+                PasswordHasher<Usuario> passwordHasher = new PasswordHasher<Usuario>();
+                if(passwordHasher.VerifyHashedPassword(usuario, usuario.PasswordHash, model.Senha) != PasswordVerificationResult.Failed)
+                {
+                    var funcoesUsuario = await _usuarioRepositorio.PegarFuncoesUsuario(usuario);
+                    var token = TokenService.GerarToken(usuario, funcoesUsuario.First());
+                    await _usuarioRepositorio.LogarUsuario(usuario, false);
+
+                    return Ok(new { 
+                        emailUsuarioLogado = usuario.Email,
+                        usuarioId = usuario.Id,
+                        tokenUsuarioLogado = token
+                    });
+                }
+
+                return NotFound("Usuário e/ou Senha inválidos");
+            }
+            return NotFound("Usuário e/ou Senha inválidos");
+        }
+
+        [HttpGet("RetornarFotoUsuario/{usuarioId}")]
+        public async Task<dynamic> RetornarFotoUsuario(string usuarioId)
+        {
+            Usuario usuario = await _usuarioRepositorio.PegarPeloId(usuarioId);
+
+            return new { imagem = usuario.Foto };
+        }
+
+        [HttpPut("AtualizarUsuario")]
+        public async Task<ActionResult> AtualizarUsuario(AtualizarUsuarioViewModel model)
+        {
+            if(ModelState.IsValid)
+            {
+                Usuario usuario = await _usuarioRepositorio.PegarPeloId(model.Id);
+                usuario.UserName = model.UserName;
+                usuario.Email = model.Email;
+                usuario.CPF = model.CPF;
+                usuario.Profissao = model.Profissao;
+                usuario.Foto = model.Foto;
+
+                await _usuarioRepositorio.AtualizarUsuario(usuario);
+
+                return Ok(new
+                {
+                    mensagem = $"Usuário {usuario.Email} atualizado com sucesso"
+                });
+
             }
 
             return BadRequest(model);

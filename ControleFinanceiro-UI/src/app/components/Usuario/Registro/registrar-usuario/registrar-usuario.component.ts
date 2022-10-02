@@ -49,6 +49,7 @@ export class RegistrarUsuarioComponent implements OnInit {
   }
 
   EnviarFormulario(): void {
+    this.erros = [];
     const usuario = this.formulario.value;
     const formData: FormData = new FormData();
 
@@ -68,8 +69,12 @@ export class RegistrarUsuarioComponent implements OnInit {
       this.usuarioService.RegistrarUsuario(dadosRegsitro).subscribe(
         (dados) => {
         const emailUsuarioLogado = dados.emailUsuarioLogado;
+        const usuarioId = dados.usuarioId;
+        const tokenUsuarioLogado = dados.tokenUsuarioLogado;
         localStorage.setItem('EmailUsuarioLogado', emailUsuarioLogado);
-        this.router.navigate(['categorias/listagemcategorias']);
+        localStorage.setItem('UsuarioId', usuarioId);
+        localStorage.setItem('TokenUsuarioLogado', tokenUsuarioLogado);
+        this.router.navigate(['/dashboard/index']);
         },
         (err) => {
           if(err.status === 400) {
@@ -83,5 +88,4 @@ export class RegistrarUsuarioComponent implements OnInit {
       );
     });
   }
-
 }

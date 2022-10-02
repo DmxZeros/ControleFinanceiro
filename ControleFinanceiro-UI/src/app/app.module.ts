@@ -9,6 +9,12 @@ import { TiposService } from './services/tipos.service';
 import { CategoriasService } from './services/categorias.service';
 import { FuncoesService } from './services/funcoes.service';
 import { UsuariosService } from './services/usuarios.service';
+import { AuthGuardService } from './services/auth-guard.service';
+import { CartoesService } from './services/cartoes.service';
+import { MesService } from './services/mes.service';
+import { DespesasService } from './services/despesas.service';
+import { GanhosService } from './services/ganhos.service';
+import { DashboardService } from './services/dashboard.service';
 
 /*imports*/
 import { FormsModule } from '@angular/forms';
@@ -29,8 +35,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxMaskModule } from 'ngx-mask';
+import { JwtModule } from '@auth0/angular-jwt';
 
 /*components*/
 import { ListagemCategoriasComponent, DialogExclusaoCategoriasComponent } from './components/Categoria/listagem-categorias/listagem-categorias.component';
@@ -40,8 +50,24 @@ import { ListagemFuncoesComponent, DialogExclusaoFuncoesComponent } from './comp
 import { AtualizarFuncaoComponent } from './components/Funcao/atualizar-funcao/atualizar-funcao.component';
 import { NovaFuncaoComponent } from './components/Funcao/nova-funcao/nova-funcao.component';
 import { RegistrarUsuarioComponent } from './components/Usuario/Registro/registrar-usuario/registrar-usuario.component';
+import { LoginUsuarioComponent } from './components/Usuario/Login/login-usuario/login-usuario.component';
+import { DashboardComponent } from './components/Dashboard/dashboard/dashboard.component';
+import { HeaderComponent } from './components/Dashboard/header/header.component';
+import { NovoCartaoComponent } from './components/Cartao/novo-cartao/novo-cartao.component';
+import { ListagemCartoesComponent,  DialogExclusaoCartoesComponent } from './components/Cartao/listagem-cartoes/listagem-cartoes.component';
+import { AtualizarCartaoComponent } from './components/Cartao/atualizar-cartao/atualizar-cartao.component';
+import { NovaDespesaComponent } from './components/Despesa/nova-despesa/nova-despesa.component';
+import { ListagemDespesasComponent, DialogExclusaoDespesasComponent } from './components/Despesa/listagem-despesas/listagem-despesas.component';
+import { AtualizarDespesaComponent } from './components/Despesa/atualizar-despesa/atualizar-despesa.component';
+import { NovoGanhoComponent } from './components/Ganho/novo-ganho/novo-ganho.component';
+import { ListagenGanhosComponent, DialogExclusaoGanhosComponent } from './components/Ganho/listagen-ganhos/listagen-ganhos.component';
+import { AtualizarGanhoComponent } from './components/Ganho/atualizar-ganho/atualizar-ganho.component';
+import { AtualizarUsuarioComponent } from './components/Usuario/Atualizar/atualizar-usuario/atualizar-usuario.component';
+import { IndexComponent } from './components/Dashboard/Index/index/index.component';
 
-
+export function PegarTokenUsuario(){
+  return localStorage.getItem('TokenUsuarioLogado');
+}
 
 @NgModule({
   declarations: [
@@ -54,7 +80,24 @@ import { RegistrarUsuarioComponent } from './components/Usuario/Registro/registr
     DialogExclusaoFuncoesComponent,
     AtualizarFuncaoComponent,
     NovaFuncaoComponent,
-    RegistrarUsuarioComponent
+    RegistrarUsuarioComponent,
+    LoginUsuarioComponent,
+    DashboardComponent,
+    HeaderComponent,
+    NovoCartaoComponent,
+    ListagemCartoesComponent,
+    DialogExclusaoCartoesComponent,
+    AtualizarCartaoComponent,
+    NovaDespesaComponent,
+    ListagemDespesasComponent,
+    AtualizarDespesaComponent,
+    DialogExclusaoDespesasComponent,
+    NovoGanhoComponent,
+    ListagenGanhosComponent,
+    AtualizarGanhoComponent,
+    DialogExclusaoGanhosComponent,
+    AtualizarUsuarioComponent,
+    IndexComponent
   ],
   imports: [
     BrowserModule,
@@ -78,15 +121,31 @@ import { RegistrarUsuarioComponent } from './components/Usuario/Registro/registr
     MatSortModule,
     MatSnackBarModule,
     MatProgressBarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatToolbarModule,
     FlexLayoutModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    JwtModule.forRoot({
+      config:{
+        tokenGetter: PegarTokenUsuario,
+        allowedDomains: ['localhost:5000'],
+        disallowedRoutes: []
+      }
+    })
   ],
   providers: [
     HttpClientModule,
     TiposService,
     CategoriasService,
     FuncoesService,
-    UsuariosService
+    UsuariosService,
+    AuthGuardService,
+    CartoesService,
+    MesService,
+    DespesasService,
+    GanhosService,
+    DashboardService
   ],
   bootstrap: [AppComponent]
 })
